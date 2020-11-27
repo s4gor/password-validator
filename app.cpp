@@ -1,6 +1,9 @@
 #include<iostream>
 #include<string.h>
+
 using namespace std;
+
+bool authFail = false;
 
 
 // password validation
@@ -24,13 +27,19 @@ string passVal(char pass[20]) {
             }
         }
          if(password >= 1 && no >= 1 && character >= 1) {
-            return "done";
+            return "done\n";
+            exit(1);
         } else {
-            return "password error\npassword must have atleast 1 number, 1 uppercase letter and 1 punctuation mark";
+
+            authFail = true;
+
+            return "password error\npassword must have atleast 1 number, 1 uppercase letter and 1 punctuation mark\n";
         }
     } else {
-        cout << no << endl;
-        return "password must be 6-12 character";
+
+        authFail = true;
+
+        return "password must be 6-12 character\n";
     }
 }
 
@@ -39,17 +48,32 @@ string passVal(char pass[20]) {
 
 int main() {
 
-    cout << "Enter your password: ";
+    while(true) {
 
-    typedef char str[15];
+        if(authFail) {
+            cout << "\nTry again\n";
+        }
+    
+        cout << "[+] enter q to exit | Enter your password: ";
 
-    str pass;
+        typedef char str[20];
 
-    cin.getline(pass, 13);
+        str pass;
 
-    string val = passVal(pass);
+        cin.getline(pass, 20);
 
-    cout << val;
+        if(strlen(pass) ==  1 && pass[0] == 'q') {
+
+            cout << "Program is terminated\n";
+
+            exit(1);
+        }
+
+        string val = passVal(pass);
+
+        cout << val;
+    
+    }
 
     return 0;
 }

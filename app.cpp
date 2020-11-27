@@ -78,5 +78,9 @@ int main() {
 
     }
 
+    cout << "press any key to exit";
+
+    cin.get();
+
     return 0;
 }

@@ -4,6 +4,7 @@
 using namespace std;
 
 bool authFail = false;
+bool active = true;
 
 
 // password validation
@@ -27,8 +28,10 @@ string passVal(char pass[20]) {
             }
         }
          if(password >= 1 && no >= 1 && character >= 1) {
+            active = false;
+            authFail = false;
             return "done\n";
-            exit(1);
+
         } else {
 
             authFail = true;
@@ -48,12 +51,12 @@ string passVal(char pass[20]) {
 
 int main() {
 
-    while(true) {
+    while(active) {
 
         if(authFail) {
             cout << "\nTry again\n";
         }
-    
+
         cout << "[+] enter q to exit | Enter your password: ";
 
         typedef char str[20];
@@ -72,7 +75,7 @@ int main() {
         string val = passVal(pass);
 
         cout << val;
-    
+
     }
 
     return 0;
